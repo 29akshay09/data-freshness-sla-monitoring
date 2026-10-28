@@ -1,8 +1,10 @@
-
 services:
-  postgres:
+  freshness_postgres:
     image: postgres:16
     container_name: freshness_postgres
+    networks:
+      - default
+      - freshness_net
     restart: unless-stopped
     environment:
       POSTGRES_DB: freshness_db
@@ -21,3 +23,7 @@ services:
 
 volumes:
   postgres_data:
+
+networks:
+  freshness_net:
+    external: true
